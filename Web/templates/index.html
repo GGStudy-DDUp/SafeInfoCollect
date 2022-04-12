@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息展示</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #date td {
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body style="height: 100%; width:100%;">
+    <div style="height: 100%; width: 100%; position:absolute;">
+        <div style="height: 10%;">
+            <form action = "{{ url_for('index') }}" method="POST" id="form">
+                <table style="width: 100%; padding: 10px; text-align: center;">
+                    <tr style="transform: translateY(50%)">
+                        <td>来源: <input type="text" name='source' value="{{ source }}"></td>
+                        <td>标题: <input type="text" name='title' value="{{ title }}"></td>
+                        <td>内容: <input type="text" name='data' value="{{ data }}"></td>
+                        <td>时间: <input type="text" name='time' value="{{ time }}"></td>
+                        <td>标签: <input type="text" name='tag' value="{{ tag }}"></td>
+                        <td><input type="submit" name='submit'value="查找" style="width: 200px;"></td>
+                    </tr>
+                </table>
+            </form>
+            <script type="text/javascript">
+                setTimeout(timer, 5*60*1000)
+                function timer(){
+                    window.location.reload();
+                }
+            </script>
+        </div>
+        <hr/>
+        <hr/>
+        <div id="date" style="height: 90%; float: bottom">
+            {% for row in rows %}
+            <table style="width: 100%; padding: 10px;">
+                <tr>
+                    <td style="width: 7%;">源地址: </td>
+                    <td style="height:auto;">{{ row["source_url"] }}</td>
+                </tr>
+                <tr>
+                    <td>内容标题: </td>
+                    <td style="height:auto;">{{ row["date_title"] }}</td>
+                </tr>
+                <tr>
+                    <td>内容信息: </td>
+                    <td style="height:auto;">{{ row["date_content"] }}</td>
+                </tr>
+                <tr>
+                    <td>内容链接: </td>
+                    <td style="height:auto;">{{ row["date_url"] }}</td>
+                </tr>
+                <tr>
+                    <td>发布时间: </td>
+                    <td style="height:auto;">{{ row["date_time"] }}</td>
+                </tr>
+                <tr>
+                    <td>标签: </td>
+                    <td style="height:auto;">{{ row["date_tag"] }}</td>
+                </tr>
+            </table>
+            <hr/>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</body>
+</html>
